@@ -1,5 +1,5 @@
 
-def binary_search(list, target):
+def iterative_binary_search(list, target):
     """
     Binary search, is very effective and efficient for large arrays. As the size of the array doubles
     Binary search only needs one more action or step for each double of the array size.
@@ -12,25 +12,39 @@ def binary_search(list, target):
     # establish the upper and lower bounds of where the target can be located
     # where lower bound is the first item in the list and upper bound is the last item in the list
     lower_bound = 0
-    upper_bound = len(list) + 1
+    upper_bound = len(list) - 1
 
-    #
     while lower_bound <= upper_bound:
-        middle = (upper_bound + lower_bound) / 2
-        # establish out middle position in the list.
-        midpoint = list[middle] 
+        mid = (upper_bound + lower_bound) // 2
 
-        # if midpoint is our target valiue, return midpoint
-        if midpoint == target:
-            return midpoint
-        
-        # if target is less than midpoint, set our new upper bound to this midpoint - 1
-        elif target < midpoint:
-            upper_bound = midpoint - 1
+        if list[mid] < target:
+            lower_bound = mid + 1
 
-        # if target is greater than midpoint, set our new lower bound to this midpoint + 1
+        elif list[mid] < target:
+            upper_bound = mid - 1
+
         else:
-            lower_bound = midpoint + 1
+            return mid
 
     # if we reach this point, the target value is not in the list. return None
     return None
+
+
+def recursive_binary_search(list, low, high, target):
+
+    # base case
+    if high >= low:
+
+        mid = (high + low) // 2
+
+        if list[mid] == target:
+            return mid # we found the target value
+        
+        elif list[mid] > target:
+            return recursive_binary_search(list, low, mid -1, target)
+        
+        else:
+            return recursive_binary_search(list, mid +1, high, target)
+        
+    else: # element not found in list.
+        return None 
