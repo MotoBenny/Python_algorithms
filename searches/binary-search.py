@@ -46,5 +46,5 @@ def recursive_binary_search(list, low, high, target):
         else:
             return recursive_binary_search(list, mid +1, high, target)
         
-    else: # element not found in list.
+    else: # element not
         return None 
